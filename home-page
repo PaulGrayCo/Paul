@@ -1,0 +1,924 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Paul Gray - Where Past Meets Future</title>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=Source+Sans+Pro:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-sage: #A8DADC;
+            --primary-terracotta: #c55043;
+            --primary-gold: #F1C40F;
+            --neutral-cream: #F8F9FA;
+            --neutral-charcoal: #2E3440;
+            
+            --atomic-turquoise: #40E0D0;
+            --corporate-amber: #D2691E;
+            --neu-light: #FFFFFF;
+            --neu-dark: #D1D1D1;
+            
+            --font-atomic: 'Space Grotesk', 'Futura', 'Helvetica Neue', sans-serif;
+            --font-corporate: 'Inter', 'Helvetica', sans-serif;
+            --font-neumorphic: 'Source Sans Pro', 'Lato', sans-serif;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-neumorphic);
+            background: var(--neutral-cream);
+            color: var(--neutral-charcoal);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* Navigation */
+        .navigation {
+            background: var(--neutral-cream);
+            padding: 1.5rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 
+                0 8px 16px rgba(163, 177, 198, 0.1),
+                0 -8px 16px rgba(255, 255, 255, 0.5);
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: var(--font-atomic);
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-terracotta);
+            text-decoration: none;
+            position: relative;
+        }
+
+        .logo::after {
+            content: '';
+            position: absolute;
+            right: -10px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 6px;
+            height: 6px;
+            background: var(--atomic-turquoise);
+            border-radius: 50%;
+            box-shadow: 0 0 10px var(--atomic-turquoise);
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 1rem;
+            list-style: none;
+        }
+
+        .nav-item {
+            padding: 0.75rem 1.5rem;
+            border-radius: 25px;
+            text-decoration: none;
+            color: var(--neutral-charcoal);
+            font-family: var(--font-corporate);
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+            box-shadow: 
+                4px 4px 8px rgba(163, 177, 198, 0.1),
+                -4px -4px 8px rgba(255, 255, 255, 0.8);
+        }
+
+        .nav-item:hover {
+            color: var(--primary-terracotta);
+            box-shadow: 
+                inset 4px 4px 8px rgba(163, 177, 198, 0.2),
+                inset -4px -4px 8px rgba(255, 255, 255, 0.9);
+        }
+
+        .nav-item.active::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 6px;
+            height: 6px;
+            background: var(--atomic-turquoise);
+            border-radius: 50%;
+            box-shadow: 0 0 10px var(--atomic-turquoise);
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 6rem 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-profile {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            margin: 0 auto 2rem;
+            position: relative;
+            overflow: hidden;
+            
+            box-shadow: 
+                16px 16px 32px rgba(197, 80, 67, 0.2),
+                -16px -16px 32px rgba(255, 255, 255, 0.8);
+        }
+
+        .hero-profile img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 50%;
+        }
+
+        .hero-profile::before {
+            content: '';
+            position: absolute;
+            top: -5px;
+            left: -5px;
+            right: -5px;
+            bottom: -5px;
+            background: linear-gradient(45deg, var(--atomic-turquoise), var(--primary-gold), var(--primary-sage));
+            border-radius: 50%;
+            z-index: -1;
+            opacity: 0.3;
+            animation: rotate 10s linear infinite;
+        }
+
+        @keyframes rotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .hero-profile-placeholder {
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, var(--primary-sage) 0%, var(--atomic-turquoise) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            color: white;
+            border-radius: 50%;
+        }
+
+        .atomic-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 25% 30%, var(--atomic-turquoise) 2px, transparent 2px),
+                radial-gradient(circle at 75% 70%, var(--primary-gold) 1px, transparent 1px),
+                radial-gradient(circle at 60% 20%, var(--primary-sage) 1.5px, transparent 1.5px);
+            opacity: 0.1;
+            pointer-events: none;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-title {
+            font-family: var(--font-atomic);
+            font-weight: 700;
+            font-size: clamp(2.5rem, 6vw, 4rem);
+            color: var(--primary-terracotta);
+            margin-bottom: 1rem;
+            letter-spacing: 0.02em;
+        }
+
+        .hero-subtitle {
+            font-family: var(--font-corporate);
+            font-weight: 500;
+            font-size: clamp(1.25rem, 3vw, 1.75rem);
+            color: var(--neutral-charcoal);
+            margin-bottom: 2rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .hero-description {
+            font-size: 1.125rem;
+            color: var(--neutral-charcoal);
+            margin-bottom: 3rem;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .cta-button {
+            background: var(--primary-terracotta);
+            color: white;
+            font-family: var(--font-atomic);
+            font-weight: 600;
+            padding: 1.25rem 2.5rem;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            position: relative;
+            overflow: hidden;
+            font-size: 1.1rem;
+            
+            box-shadow: 
+                12px 12px 24px rgba(197, 80, 67, 0.3),
+                -12px -12px 24px rgba(255, 255, 255, 0.8);
+        }
+
+        .cta-button::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background: radial-gradient(circle, rgba(64, 224, 208, 0.3) 0%, transparent 70%);
+            transition: all 0.5s ease;
+            transform: translate(-50%, -50%);
+        }
+
+        .cta-button:hover::before {
+            width: 300px;
+            height: 300px;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 
+                16px 16px 32px rgba(197, 80, 67, 0.4),
+                -16px -16px 32px rgba(255, 255, 255, 0.9);
+        }
+
+        /* Content Areas */
+        .content-section {
+            padding: 4rem 0;
+        }
+
+        .section-title {
+            font-family: var(--font-atomic);
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 600;
+            color: var(--primary-terracotta);
+            text-align: center;
+            margin-bottom: 3rem;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 4px;
+            background: var(--atomic-turquoise);
+            border-radius: 2px;
+        }
+
+        .content-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-top: 4rem;
+        }
+
+        .content-card {
+            background: var(--neutral-cream);
+            border-radius: 25px;
+            padding: 2.5rem;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            
+            box-shadow: 
+                16px 16px 32px rgba(163, 177, 198, 0.2),
+                -16px -16px 32px rgba(255, 255, 255, 0.8);
+        }
+
+        .content-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 80px;
+            height: 80px;
+            background: radial-gradient(circle, var(--primary-gold) 0%, transparent 70%);
+            opacity: 0.1;
+            transition: all 0.3s ease;
+        }
+
+        .content-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 
+                24px 24px 48px rgba(163, 177, 198, 0.3),
+                -24px -24px 48px rgba(255, 255, 255, 0.9);
+        }
+
+        .content-card:hover::before {
+            opacity: 0.3;
+            transform: rotate(15deg);
+        }
+
+        .card-icon {
+            width: 60px;
+            height: 60px;
+            background: var(--primary-sage);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            
+            box-shadow: 
+                8px 8px 16px rgba(168, 218, 220, 0.3),
+                -8px -8px 16px rgba(255, 255, 255, 0.9);
+        }
+
+        .card-title {
+            font-family: var(--font-atomic);
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--primary-terracotta);
+            margin-bottom: 1rem;
+        }
+
+        .card-description {
+            font-family: var(--font-neumorphic);
+            color: var(--neutral-charcoal);
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+
+        .card-link {
+            font-family: var(--font-corporate);
+            font-weight: 500;
+            color: var(--atomic-turquoise);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .card-link:hover {
+            color: var(--primary-terracotta);
+            transform: translateX(5px);
+        }
+
+        /* Featured Work Section */
+        .featured-work {
+            background: var(--neutral-cream);
+            padding: 4rem 0;
+            margin: 4rem 0;
+            border-radius: 25px;
+            position: relative;
+            
+            box-shadow: 
+                inset 20px 20px 40px rgba(163, 177, 198, 0.1),
+                inset -20px -20px 40px rgba(255, 255, 255, 0.8);
+        }
+
+        .work-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .work-item {
+            background: var(--neu-light);
+            border-radius: 20px;
+            padding: 1.5rem;
+            transition: all 0.3s ease;
+            
+            box-shadow: 
+                12px 12px 24px rgba(163, 177, 198, 0.15),
+                -12px -12px 24px rgba(255, 255, 255, 0.9);
+        }
+
+        .work-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 
+                16px 16px 32px rgba(163, 177, 198, 0.2),
+                -16px -16px 32px rgba(255, 255, 255, 0.95);
+        }
+
+        .work-thumbnail {
+            width: 100%;
+            height: 200px;
+            background: linear-gradient(135deg, var(--primary-sage) 0%, var(--atomic-turquoise) 100%);
+            border-radius: 15px;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 3rem;
+            opacity: 0.8;
+        }
+
+        .work-title {
+            font-family: var(--font-atomic);
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--primary-terracotta);
+            margin-bottom: 0.5rem;
+        }
+
+        .work-category {
+            display: inline-block;
+            background: var(--primary-gold);
+            color: var(--neutral-charcoal);
+            padding: 0.25rem 0.75rem;
+            border-radius: 15px;
+            font-family: var(--font-corporate);
+            font-size: 0.75rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 1rem;
+        }
+
+        .work-description {
+            font-size: 0.9rem;
+            color: var(--neutral-charcoal);
+            line-height: 1.5;
+        }
+
+        /* Email Signup */
+        .signup-section {
+            background: var(--neutral-cream);
+            padding: 4rem 2rem;
+            margin: 4rem 0;
+            border-radius: 25px;
+            text-align: center;
+            position: relative;
+            
+            box-shadow: 
+                inset 20px 20px 40px rgba(163, 177, 198, 0.1),
+                inset -20px -20px 40px rgba(255, 255, 255, 0.8);
+        }
+
+        .signup-section::before {
+            content: '';
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            right: 20px;
+            bottom: 20px;
+            border: 2px solid var(--primary-gold);
+            border-radius: 20px;
+            opacity: 0.1;
+            
+            background: 
+                radial-gradient(ellipse 200px 50px at 50% 50%, transparent 40%, var(--atomic-turquoise) 41%, var(--atomic-turquoise) 42%, transparent 43%),
+                radial-gradient(ellipse 50px 200px at 50% 50%, transparent 40%, var(--primary-gold) 41%, var(--primary-gold) 42%, transparent 43%);
+        }
+
+        .signup-title {
+            font-family: var(--font-atomic);
+            font-size: 2rem;
+            font-weight: 600;
+            color: var(--primary-terracotta);
+            margin-bottom: 1rem;
+        }
+
+        .signup-description {
+            font-family: var(--font-neumorphic);
+            color: var(--neutral-charcoal);
+            font-size: 1.125rem;
+            margin-bottom: 2rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .signup-form {
+            display: flex;
+            gap: 1rem;
+            max-width: 600px;
+            margin: 0 auto;
+            flex-wrap: wrap;
+        }
+
+        .signup-input {
+            flex: 1;
+            min-width: 200px;
+            background: var(--neutral-cream);
+            border: none;
+            border-radius: 25px;
+            padding: 1rem 1.5rem;
+            font-family: var(--font-neumorphic);
+            font-size: 1rem;
+            color: var(--neutral-charcoal);
+            
+            box-shadow: 
+                inset 8px 8px 16px rgba(163, 177, 198, 0.2),
+                inset -8px -8px 16px rgba(255, 255, 255, 0.8);
+            
+            transition: all 0.3s ease;
+        }
+
+        .signup-input:focus {
+            outline: none;
+            box-shadow: 
+                inset 8px 8px 16px rgba(163, 177, 198, 0.3),
+                inset -8px -8px 16px rgba(255, 255, 255, 0.9),
+                0 0 0 3px rgba(197, 80, 67, 0.3);
+        }
+
+        .signup-input::placeholder {
+            color: rgba(46, 52, 64, 0.6);
+        }
+
+        .signup-button {
+            background: var(--primary-terracotta);
+            color: white;
+            font-family: var(--font-atomic);
+            font-weight: 600;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            
+            box-shadow: 
+                8px 8px 16px rgba(197, 80, 67, 0.3),
+                -8px -8px 16px rgba(255, 255, 255, 0.8);
+        }
+
+        .signup-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 
+                12px 12px 24px rgba(197, 80, 67, 0.4),
+                -12px -12px 24px rgba(255, 255, 255, 0.9);
+        }
+
+        .signup-button:active {
+            transform: translateY(0);
+            box-shadow: 
+                inset 4px 4px 8px rgba(197, 80, 67, 0.3),
+                inset -4px -4px 8px rgba(255, 255, 255, 0.8);
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--neutral-charcoal);
+            color: var(--neutral-cream);
+            padding: 3rem 0;
+            margin-top: 4rem;
+            text-align: center;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h3 {
+            font-family: var(--font-atomic);
+            font-size: 1.25rem;
+            color: var(--primary-sage);
+            margin-bottom: 1rem;
+        }
+
+        .footer-section p, .footer-section a {
+            color: var(--neutral-cream);
+            text-decoration: none;
+            opacity: 0.8;
+            transition: opacity 0.3s ease;
+        }
+
+        .footer-section a:hover {
+            opacity: 1;
+            color: var(--atomic-turquoise);
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(168, 218, 220, 0.2);
+            padding-top: 2rem;
+            font-size: 0.9rem;
+            opacity: 0.7;
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 1rem;
+            }
+            
+            .nav-menu {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+            
+            .hero {
+                padding: 4rem 0;
+            }
+            
+            .content-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .signup-form {
+                flex-direction: column;
+                max-width: 400px;
+            }
+            
+            .signup-input {
+                min-width: 100%;
+            }
+            
+            .atomic-overlay {
+                opacity: 0.05;
+            }
+        }
+
+        /* Accessibility */
+        @media (prefers-reduced-motion: reduce) {
+            * {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+
+        @media (prefers-contrast: high) {
+            :root {
+                --primary-terracotta: #B71C1C;
+                --neutral-charcoal: #000000;
+                --atomic-turquoise: #00695C;
+            }
+        }
+
+        .btn-primary:focus,
+        .nav-item:focus,
+        .signup-input:focus {
+            outline: 3px solid var(--primary-gold);
+            outline-offset: 2px;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navigation">
+        <div class="container">
+            <div class="nav-container">
+                <a href="#" class="logo">Paul Gray</a>
+                <ul class="nav-menu">
+                    <li><a href="#home" class="nav-item active">Home</a></li>
+                    <li><a href="#work" class="nav-item">Portfolio</a></li>
+                    <li><a href="#about" class="nav-item">About</a></li>
+                    <li><a href="#contact" class="nav-item">Contact</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <section class="hero" id="home">
+        <div class="atomic-overlay"></div>
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-profile">
+                    <!-- Replace this div with an img tag when you have your profile picture -->
+                    <div class="hero-profile-placeholder">PG</div>
+                    <!-- <img src="your-profile-picture.jpg" alt="Paul Gray"> -->
+                </div>
+                <h1 class="hero-title">Where Past Meets Future</h1>
+                <p class="hero-subtitle">Nostalgia-Inspired Content Creation</p>
+                <p class="hero-description">
+                    Crafting cinematic video edits that celebrate the golden age of storytelling, 
+                    developing AI-powered games with retro soul, and uncovering hidden gems from 
+                    forgotten destinations around the world.
+                </p>
+                <a href="#newsletter" class="cta-button">Join the Journey</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="content-section" id="services">
+        <div class="container">
+            <h2 class="section-title">What I Create</h2>
+            <div class="content-grid">
+                <div class="content-card">
+                    <div class="card-icon">🎬</div>
+                    <h3 class="card-title">Nostalgia-Inspired Video Editing</h3>
+                    <p class="card-description">
+                        Transforming raw footage into cinematic masterpieces that evoke the golden age of film. 
+                        Using vintage colour grading techniques, retro transitions, and period-appropriate 
+                        storytelling to help content creators build authentic connections with their audiences.
+                    </p>
+                    <a href="#" class="card-link">View Video Portfolio →</a>
+                </div>
+                
+                <div class="content-card">
+                    <div class="card-icon">🎮</div>
+                    <h3 class="card-title">AI-Powered Retro Games</h3>
+                    <p class="card-description">
+                        Developing video games that blend cutting-edge AI technology with nostalgic gameplay mechanics. 
+                        Creating experiences that feel both familiar and futuristic, where artificial intelligence 
+                        meets the timeless joy of classic gaming.
+                    </p>
+                    <a href="#" class="card-link">Play My Games →</a>
+                </div>
+                
+                <div class="content-card">
+                    <div class="card-icon">✈️</div>
+                    <h3 class="card-title">Hidden Gem Destinations</h3>
+                    <p class="card-description">
+                        Documenting forgotten places and nostalgic destinations that tell stories of bygone eras. 
+                        From abandoned art deco buildings to vintage diners, discovering locations where the past 
+                        lives on in beautiful, unexpected ways.
+                    </p>
+                    <a href="#" class="card-link">Explore Destinations →</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="featured-work" id="work">
+        <div class="container">
+            <h2 class="section-title">Featured Work</h2>
+            <div class="work-grid">
+                <div class="work-item">
+                    <div class="work-thumbnail">🎬</div>
+                    <div class="work-category">Video Editing</div>
+                    <h3 class="work-title">Retro Travel Series</h3>
+                    <p class="work-description">
+                        A cinematic travel series shot in Super 8 style, featuring forgotten Route 66 motels 
+                        and their timeless stories.
+                    </p>
+                </div>
+                
+                <div class="work-item">
+                    <div class="work-thumbnail">🎮</div>
+                    <div class="work-category">Game Design</div>
+                    <h3 class="work-title">Neon Arcade AI</h3>
+                    <p class="work-description">
+                        An AI-driven arcade game that adapts to player behaviour whilst maintaining 
+                        classic 80s aesthetics and gameplay.
+                    </p>
+                </div>
+                
+                <div class="work-item">
+                    <div class="work-thumbnail">📍</div>
+                    <div class="work-category">Travel</div>
+                    <h3 class="work-title">Lost Diners of America</h3>
+                    <p class="work-description">
+                        A photo documentary exploring authentic American diners that have remained 
+                        unchanged since the 1950s.
+                    </p>
+                </div>
+                
+                <div class="work-item">
+                    <div class="work-thumbnail">🎥</div>
+                    <div class="work-category">YouTube Series</div>
+                    <h3 class="work-title">Vintage Tech Revival</h3>
+                    <p class="work-description">
+                        Weekly episodes showcasing how classic technology principles inspire 
+                        modern AI and game development.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="signup-section" id="newsletter">
+        <div class="container">
+            <h2 class="signup-title">Join the Nostalgia Journey</h2>
+            <p class="signup-description">
+                Get weekly updates on new video releases, game development progress, and hidden gem discoveries. 
+                Plus exclusive behind-the-scenes content and early access to new projects.
+            </p>
+            <form class="signup-form">
+                <input type="text" class="signup-input" placeholder="First Name" required>
+                <input type="email" class="signup-input" placeholder="Email Address" required>
+                <button type="submit" class="signup-button">Subscribe</button>
+            </form>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Follow the Journey</h3>
+                    <p>Subscribe to my YouTube channel for weekly content exploring the intersection of nostalgia and modern technology.</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Connect</h3>
+                    <p>
+                        <a href="#">YouTube</a> | 
+                        <a href="#">Instagram</a> | 
+                        <a href="#">Twitter</a> | 
+                        <a href="#">GitHub</a>
+                    </p>
+                </div>
+                <div class="footer-section">
+                    <h3>Collaborate</h3>
+                    <p>Interested in working together? Drop me a line at paul@paulgray.co</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Paul Gray. Crafting the future with inspiration from the past.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Active navigation state
+        window.addEventListener('scroll', function() {
+            const sections = document.querySelectorAll('section[id]');
+            const navLinks = document.querySelectorAll('.nav-item');
+            
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (window.scrollY >= sectionTop - 200) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === `#${current}`) {
+                    link.classList.add('active');
+                }
+            });
+        });
+
+        // Email signup form
+        document.querySelector('.signup-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const firstName = this.querySelector('input[type="text"]').value;
+            const email = this.querySelector('input[type="email"]').value;
+            const button = this.querySelector('.signup-button');
+            
+            if (firstName && email) {
+                button.innerHTML = 'Subscribed!';
+                button.style.background = 'var(--primary-sage)';
+                setTimeout(() => {
+                    button.innerHTML = 'Subscribe';
+                    button.style.background = 'var(--primary-terracotta)';
+                    this.querySelector('input[type="text"]').value = '';
+                    this.querySelector('input[type="email"]').value = '';
+                }, 3000);
+            }
+        });
+
+        // Parallax effect for atomic overlay
+        window.addEventListener('scroll', function() {
+            const scrolled = window.pageYOffset;
+            const rate = scrolled * -0.5;
+            const overlay = document.querySelector('.atomic-overlay');
+            if (overlay) {
+                overlay.style.transform = `translateY(${rate}px)`;
+            }
+        });
+    </script>
+</body>
+</html>
