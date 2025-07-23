@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sovereign Creator Starter Kit - Members Only</title>
+    <meta name="description" content="Access your Sovereign Creator Starter Kit resources">
+    <meta name="robots" content="noindex, nofollow">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Mono:wght@400;600;700;900&display=swap" rel="stylesheet">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --text: #2a2b2a;
+            --accent: #cc5043;
+            --bg: #f6f5fa;
+            --white: #ffffff;
+            --gray: #6b7280;
+        }
+
+        body {
+            font-family: 'Noto Sans Mono', monospace;
+            line-height: 1.6;
+            color: var(--text);
+            background: var(--bg);
+            font-size: 14px;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            padding: 2rem 0;
+            border-bottom: 2px solid var(--text);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 900;
+            color: #000000;
+            text-decoration: none;
+        }
+
+        .nav-link {
+            color: var(--accent);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.875rem;
+            border-bottom: 2px solid transparent;
+            transition: all 0.2s;
+            padding-bottom: 2px;
+        }
+
+        .nav-link:hover {
+            border-bottom-color: var(--accent);
+        }
+
+        /* Password Protection Screen */
+        .password-screen {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: calc(100vh - 200px);
+            padding: 4rem 0;
+        }
+
+        .password-box {
+            background: var(--white);
+            border: 2px solid var(--text);
+            padding: 3rem 2rem;
+            max-width: 400px;
+            width: 100%;
+            text-align: center;
+            position: relative;
+        }
+
+        .password-box::before {
+            content: "// MEMBERS ONLY";
+            position: absolute;
+            top: -12px;
+            left: 20px;
+            background: var(--bg);
+            padding: 0 10px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: var(--accent);
+        }
+
+        .password-box h1 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .password-box p {
+            font-size: 0.875rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        .password-input {
+            width: 100%;
+            padding: 0.875rem 1rem;
+            font-family: 'Noto Sans Mono', monospace;
+            font-size: 0.875rem;
+            border: 2px solid var(--text);
+            background: var(--white);
+            color: var(--text);
+            margin-bottom: 1rem;
+            text-align: center;
+            letter-spacing: 0.1em;
+        }
+
+        .password-input:focus {
+            outline: none;
+            border-color: var(--accent);
+        }
+
+        .unlock-button {
+            width: 100%;
+            padding: 0.875rem 2rem;
+            font-family: 'Noto Sans Mono', monospace;
+            font-size: 1rem;
+            font-weight: 700;
+            background: var(--accent);
+            color: var(--white);
+            border: 2px solid var(--accent);
+            cursor: pointer;
+            transition: all 0.2s;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .unlock-button:hover {
+            background: transparent;
+            color: var(--accent);
+        }
+
+        .error-message {
+            color: var(--accent);
+            font-size: 0.75rem;
+            margin-top: 1rem;
+            display: none;
+        }
+
+        /* Members Content */
+        .members-content {
+            display: none;
+            padding: 4rem 0;
+        }
+
+        .welcome-section {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .welcome-section h1 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .welcome-section p {
+            font-size: 1rem;
+            opacity: 0.9;
+        }
+
+        /* Resource Grid */
+        .resource-grid {
+            display: grid;
+            gap: 2rem;
+            margin-bottom: 4rem;
+        }
+
+        .resource-card {
+            background: var(--white);
+            border: 2px solid var(--text);
+            padding: 2rem;
+            position: relative;
+            transition: transform 0.2s;
+        }
+
+        .resource-card:hover {
+            transform: translateY(-4px);
+        }
+
+        .resource-number {
+            position: absolute;
+            top: -12px;
+            left: 20px;
+            background: var(--bg);
+            padding: 0 10px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: var(--accent);
+        }
+
+        .resource-card h3 {
+            font-size: 1.25rem;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .resource-card p {
+            font-size: 0.875rem;
+            margin-bottom: 1.5rem;
+            line-height: 1.8;
+            opacity: 0.9;
+        }
+
+        .resource-links {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .resource-link {
+            padding: 0.5rem 1rem;
+            border: 2px solid var(--text);
+            color: var(--text);
+            text-decoration: none;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            transition: all 0.2s;
+        }
+
+        .resource-link:hover {
+            background: var(--text);
+            color: var(--white);
+            transform: translateY(-2px);
+        }
+
+        /* Quick Links */
+        .quick-links {
+            background: var(--text);
+            color: var(--white);
+            padding: 3rem 2rem;
+            margin: 0 -20px 4rem;
+            text-align: center;
+        }
+
+        .quick-links h2 {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--bg);
+        }
+
+        .links-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .quick-link {
+            padding: 1rem;
+            border: 2px solid var(--bg);
+            color: var(--bg);
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.2s;
+        }
+
+        .quick-link:hover {
+            background: var(--bg);
+            color: var(--text);
+        }
+
+        /* Footer */
+        footer {
+            padding: 3rem 0 2rem;
+            border-top: 2px solid var(--text);
+            text-align: center;
+        }
+
+        footer p {
+            font-size: 0.75rem;
+            opacity: 0.85;
+        }
+
+        /* Responsive */
+        @media (max-width: 640px) {
+            .password-box {
+                padding: 2rem 1.5rem;
+            }
+
+            .resource-card {
+                padding: 1.5rem;
+            }
+
+            .links-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="container">
+            <a href="/" class="logo">Paul.</a>
+            <a href="/" class="nav-link">← BACK HOME</a>
+        </nav>
+    </header>
+
+    <!-- Password Protection Screen -->
+    <div class="password-screen" id="passwordScreen">
+        <div class="container">
+            <div class="password-box">
+                <h1>Starter Kit Access</h1>
+                <p>Enter the password from your welcome email to access your resources.</p>
+                <input type="password" 
+                       class="password-input" 
+                       id="passwordInput" 
+                       placeholder="Enter password"
+                       autocomplete="off">
+                <button class="unlock-button" onclick="checkPassword()">UNLOCK →</button>
+                <p class="error-message" id="errorMessage">Incorrect password. Check your email.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Members Content (Hidden by default) -->
+    <div class="members-content" id="membersContent">
+        <div class="container">
+            <section class="welcome-section">
+                <h1>Welcome, Sovereign Creator</h1>
+                <p>Everything you need to build your independent business is here. No fluff, just tools.</p>
+            </section>
+
+            <section class="resource-grid">
+                <!-- Landing Page Template -->
+                <div class="resource-card">
+                    <span class="resource-number">[01]</span>
+                    <h3>Landing Page Template</h3>
+                    <p>Ready-to-use HTML template with swipe copy for digital creators, artists, techies, and free thinkers. Includes 5-minute deployment guide.</p>
+                    <div class="resource-links">
+                        <a href="/downloads/landing-page-template.html" class="resource-link" download>Download HTML</a>
+                        <a href="/downloads/landing-page-guide.pdf" class="resource-link" download>Setup Guide</a>
+                        <a href="https://www.notion.so/landing-page-kit" class="resource-link" target="_blank">Notion Version</a>
+                    </div>
+                </div>
+
+                <!-- ADHD Planning System -->
+                <div class="resource-card">
+                    <span class="resource-number">[02]</span>
+                    <h3>Energy-Based Planning System</h3>
+                    <p>Work WITH your ADHD brain, not against it. Track energy instead of time. Includes 2-day project rule and emergency protocols.</p>
+                    <div class="resource-links">
+                        <a href="/downloads/planning-system.pdf" class="resource-link" download>Download PDF</a>
+                        <a href="https://www.notion.so/planning-system" class="resource-link" target="_blank">Notion Template</a>
+                        <a href="/downloads/weekly-tracker.pdf" class="resource-link" download>Print Tracker</a>
+                    </div>
+                </div>
+
+                <!-- Manifesto & Principles -->
+                <div class="resource-card">
+                    <span class="resource-number">[03]</span>
+                    <h3>Sovereign Creator Manifesto</h3>
+                    <p>12 principles for building without burnout. Print it, share it, live it. Includes daily practices and decision filters.</p>
+                    <div class="resource-links">
+                        <a href="/downloads/manifesto.pdf" class="resource-link" download>Download PDF</a>
+                        <a href="/downloads/manifesto-poster.pdf" class="resource-link" download>Printable Poster</a>
+                        <a href="#" onclick="shareManifesto()" class="resource-link">Share Version</a>
+                    </div>
+                </div>
+
+                <!-- Email Automation -->
+                <div class="resource-card">
+                    <span class="resource-number">[04]</span>
+                    <h3>Email Automation Blueprint</h3>
+                    <p>3-email welcome sequence that builds trust without the sleaze. ConvertKit setup guide included.</p>
+                    <div class="resource-links">
+                        <a href="/downloads/email-templates.pdf" class="resource-link" download>Email Templates</a>
+                        <a href="/downloads/convertkit-guide.pdf" class="resource-link" download>Setup Guide</a>
+                        <a href="https://www.notion.so/email-automation" class="resource-link" target="_blank">Notion Swipes</a>
+                    </div>
+                </div>
+            </section>
+
+            <section class="quick-links">
+                <h2>// Quick Access</h2>
+                <div class="links-grid">
+                    <a href="/downloads/complete-kit.zip" class="quick-link">Download Everything</a>
+                    <a href="https://www.notion.so/sovereign-creator-kit" class="quick-link" target="_blank">Notion Master</a>
+                    <a href="#help" class="quick-link">Get Help</a>
+                    <a href="mailto:?subject=Sovereign Creator Resources" class="quick-link">Invite Friend</a>
+                </div>
+            </section>
+
+            <section class="resource-card" style="background: var(--bg); border-style: dashed;">
+                <h3>🎁 Bonus Resources</h3>
+                <p>New resources added monthly. Recent additions:</p>
+                <ul style="list-style: none; font-size: 0.875rem; line-height: 2;">
+                    <li>→ ConvertKit email templates (5 variations)</li>
+                    <li>→ Social media bio generator for rebels</li>
+                    <li>→ "Good Enough" content checklist</li>
+                    <li>→ Community guidelines template</li>
+                </ul>
+            </section>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <p>© 2025 Paul Gray · For sovereign creators only · Share responsibly</p>
+        </div>
+    </footer>
+
+    <script>
+        // Simple password protection
+        const CORRECT_PASSWORD = 'S0VERE1GN';
+        
+        // Check if already authenticated
+        if (localStorage.getItem('sovereignAccess') === 'granted') {
+            showMembersContent();
+        }
+        
+        // Check password on Enter key
+        document.getElementById('passwordInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                checkPassword();
+            }
+        });
+        
+        function checkPassword() {
+            const input = document.getElementById('passwordInput').value;
+            const errorMsg = document.getElementById('errorMessage');
+            
+            if (input === CORRECT_PASSWORD) {
+                // Store access in localStorage
+                localStorage.setItem('sovereignAccess', 'granted');
+                showMembersContent();
+            } else {
+                errorMsg.style.display = 'block';
+                document.getElementById('passwordInput').value = '';
+            }
+        }
+        
+        function showMembersContent() {
+            document.getElementById('passwordScreen').style.display = 'none';
+            document.getElementById('membersContent').style.display = 'block';
+        }
+        
+        function shareManifesto() {
+            const shareText = 'Check out the Sovereign Creator Manifesto - for rebels who refuse to hustle';
+            const shareUrl = window.location.href;
+            
+            if (navigator.share) {
+                navigator.share({
+                    title: 'Sovereign Creator Manifesto',
+                    text: shareText,
+                    url: shareUrl
+                });
+            } else {
+                // Fallback - copy to clipboard
+                navigator.clipboard.writeText(shareUrl);
+                alert('Link copied to clipboard!');
+            }
+        }
+    </script>
+</body>
+</html>
